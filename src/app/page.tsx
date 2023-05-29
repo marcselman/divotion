@@ -6,10 +6,8 @@ import styles from './page.module.scss'
 import logo from '../../public/logo.svg'
 import wishlistIcon from '../../public/wishlist-icon.svg'
 import { useState } from 'react'
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { useLocalStorage } from 'usehooks-ts'
-
-const queryClient = new QueryClient();
 
 type Product = {
 	id: number,
@@ -29,7 +27,7 @@ type WishlistItem = {
 	quantity: number
 }
 
-export default function Home() {
+function Products() {
 	const [wishlist, setWishlist] = useLocalStorage<WishlistItem[]>('wishlist', [])
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 	const productsQuery = useQuery('products', () =>
@@ -39,7 +37,7 @@ export default function Home() {
 	)
 
 	return (
-		<QueryClientProvider client={queryClient}>
+		<>
 			<header className={styles.banner} role="banner">
 				<section className={styles.bannerContent}>
 					<Image
@@ -180,6 +178,16 @@ export default function Home() {
 					)}
 				</article>
 			</main>
+		</>
+	)
+}
+
+const queryClient = new QueryClient();
+
+export default function Home() {
+	return (
+		<QueryClientProvider client={queryClient}>
+			<Products />
 		</QueryClientProvider>
 	)
 }
