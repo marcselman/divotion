@@ -1,11 +1,7 @@
-'use client';
-
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { QueryClient, QueryClientProvider } from 'react-query'
 
 const inter = Inter({ subsets: ['latin'] });
-const queryClient = new QueryClient();
 
 export const metadata = {
 	title: 'Create Next App',
@@ -23,9 +19,7 @@ export default function RootLayout({
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
 			</head>
 			<body className={inter.className}>
-				<QueryClientProvider client={queryClient}>
-					{children}
-				</QueryClientProvider>
+				{children}
 			</body>
 		</html>
 	)
